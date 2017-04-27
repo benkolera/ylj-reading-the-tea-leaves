@@ -11,14 +11,25 @@ If you forgot to do this don't fret and still come along if you're interested!
 Ben will have his 4G Hotspot around, but it can only do 10 connections at once
 and is his own personal data quota: so be nice! :)
 
-The high level prerequisites are as follows:
+You'll need a laptop at the workshop with the following high level prerequisites:
 
+  - This entire git repo checked out.
   - nodejs & NPM (node package manager)
   - bower (a package manager that purescript uses)
   - elm
   - purescript & pulp (purescript build tool)
   - A text editor (Visual Studio Code works well)
   - Installing the elm and purescript dependencies in each of the projects
+
+### Code
+
+If you have git, just `git clone git@github.com:benkolera/ylj-reading-the-tea-leaves.git`.
+
+If you don't have git and don't want to set that up, you can just 
+[download the code here](https://github.com/benkolera/ylj-reading-the-tea-leaves/archive/master.zip). 
+
+It'll be easier with git because you'll be able to easily pull new changes when
+I invaribly make last minute changes. :)
 
 ### NodeJs & NPM
 
@@ -77,7 +88,7 @@ TODO: Test this in windows that VSCode can find all the tools.
 ### Elm Dependencies
 
 To make sure Elm is all happy and that it downloads all of the packages you need
-before the workshop. Jump into the /elm directory of this project and run elm-reactor.
+before the workshop. Jump into the /elm directory of this project and run `elm-reactor`.
 
 In a browser, navigate to http://localhost:8000/test.html and wait for hello world to 
 appear. It needs to install a few dependencies to get there, so don't worry if it 
