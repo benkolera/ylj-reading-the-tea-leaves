@@ -1,0 +1,151 @@
+@font-face {
+    font-family: "Oswald";
+    src: url("./fonts/Oswald/Oswald-Regular.ttf");
+}
+@font-face {
+    font-family: "Roboto";
+    src: url("./fonts/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Mono";
+    src: url("./fonts/RobotoMono/RobotoMono-Regular.ttf");
+}
+
+html,body {
+    color: #333;
+    background-color: #BCC8D1;
+	margin: 0;
+	padding: 0;
+    font-family: Roboto
+}
+
+h1,h2 {
+    font-family: "Oswald"
+}
+
+.pomodoro {
+  margin: 20px auto;
+  padding: 10px;
+  text-align: center;
+  width: 300px;
+  height: 110px;
+  font-family: "Roboto Mono";
+  background: #3C434C;
+  border-radius: 2px;
+  box-shadow: 
+    0 2px 4px 0 rgba(0, 0, 0, 0.2),
+    0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+
+.pomodoro .timer-selector {
+    font-size: 1em;
+    text-align: center;
+    background-color: #202731;
+    color: #FFF;
+    width: 100%;
+    height: 100%;
+}
+
+.pomodoro .timer {
+    font-size: 5em;
+    background-color: #202731;
+    color: #FFF;
+    width: 100%;
+    height: 100%;
+}
+
+.timer-colon {
+  color: #EEE;
+}
+
+:focus {
+	outline: 0;
+}
+
+.hidden {
+	display: none;
+}
+
+.todo {
+	background: #fff;
+	margin: 30px auto;
+    max-width: 500px;
+	position: relative;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
+	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+
+.todo-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+    line-height: 2em;
+    display: block;
+}
+
+.todo-list li {
+	position: relative;
+	font-size: 24px;
+	border-bottom: 1px solid #ededed;
+    padding: 8px;
+    display: flex; 
+    flex-wrap: nowrap;
+}
+
+.todo-list li:last-child {
+	border-bottom: none;
+}
+
+.todo-list li label {
+    flex: 1 2;
+}
+
+.todo-list li.active {
+    background-color: #D9FFD9;
+}
+
+.todo-list li label input[type=checkbox] {
+    margin-right: 10px;
+}
+
+.todo-list li.completed label {
+    color: #D9D9D9;
+    text-decoration: line-through;
+}
+
+.timer-start {
+    background-image: url("./assets/images/stopwatch.png");
+    background-color: inherit;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.time-spent {
+    color: #666;
+	font-size: 18px;
+}
+
+.completed .time-spent {
+    color: #999;
+}
+
+.new-todo,
+.edit {
+	margin: 0;
+	width: 100%;
+	font-size: 24px;
+	line-height: 1.4em;
+	padding: 6px;
+	border: 1px solid #999;
+	box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+}
+
+.new-todo {
+	padding: 16px 16px 16px 16px;
+	border: none;
+	background: rgba(0, 0, 0, 0.003);
+	box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
+}
