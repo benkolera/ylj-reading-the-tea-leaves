@@ -1,12 +1,11 @@
 # Reading the TEA Leaves - Talk & Workshop
 
-<a href="https://twitter.com/benkolera" class="twitter-follow-button" data-show-count="false">Follow @benkolera</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 This repository contains code and slides for a talk & workshop 
-investigating the Elm Architecture (TEA) and exploring it in
+investigating The Elm Architecture (TEA) and exploring it in
 Elm and Halogen (a purescript library).
 
-This workshop was created by Ben Kolera for YOW Lambda Jam 2017.
+This workshop was created by [Ben Kolera](https://twitter.com/benkolera/) for
+[YOW Lambda Jam 2017](http://lambdajam.yowconference.com.au/program/).
 
 ## Summary
 
@@ -23,16 +22,16 @@ of mainstream developers.
 Elm/TEA makes a very deliberate design choice to avoid thinking of building UIs
 in terms of components. It places the focus on building separate, reusable
 functions/types for each of the model, view and update (event processing) parts
-rather than thinking in the traditional OO component style. Functional is a 
-good thing, and TEA is incredibly easy to get started but the design doesn't
-really bake in an idea of separating the public and private events/state of
-a UI element. 
+rather than thinking in the traditional OO component style. Functional is a good
+thing and the simplicity makes TEA incredibly easy to get started with. However,
+the design doesn't really bake in an idea of separating the public and private
+events/state of a UI element and it can get a little messy.
 
 Halogen, on the other hand is a similar Model-View-Intent framework
 but works in terms of composable components each with their own internal state
 and clearly defined input and output events. This is more complicated at first,
 but allows composition of UI elements in a much more modular way since the 
-lines between internal state/actions and public API are not as blurred. Even better
+lines between internal state/actions and public API are not as blurred. Even better,
 it makes the state/events/any effects obvious in the component type, so you can
 reason about the component based on type.
 
@@ -44,7 +43,7 @@ important. We'll need to go a bit past TodoMVC to get this to be obvious.
 This intention of this talk is not to posture one as better than the other, but
 to talk about the shapes of each and why one or both may be worth your interest.
 Even if neither quite work for your use cases, it is still very useful to
-understand where people are pushing the bounds of typesafe JS UIs.
+understand where some people are pushing the bounds of typesafe JS UIs.
 
 ## Slides
 
@@ -61,7 +60,7 @@ once and is his own personal data quota: so be nice! :)
 
 See [Installation Prereqs](./workshop/installation.md) for details.
 
-See [Workshop](./workshop/readme.md) for the actual workshop details.
+See [Workshop](./workshop/README.md) for the actual workshop details.
 
 # Acknowledgements & License
 
@@ -77,4 +76,3 @@ Big thanks to the following people whose work made this talk/workshop easier:
   - [Phil Freeman for Purescript](https://github.com/purescript/purescript)
   - [Slamdata for Halogen](https://github.com/slamdata/purescript-halogen/)
   - [Bodil Stokke (who is here at YLJ, so give her a high-five!) for writing Pulp](https://github.com/bodil/pulp)
-)

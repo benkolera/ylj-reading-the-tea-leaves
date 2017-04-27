@@ -1,7 +1,7 @@
 # Workshop
 
 If you haven't already, please read [Installation
-Prereqs](./workshop/installation.md) for details.
+Prereqs](./installation.md) for details.
 
 ## Steps
 
