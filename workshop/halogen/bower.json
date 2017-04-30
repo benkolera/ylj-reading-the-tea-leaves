@@ -10,7 +10,8 @@
     "purescript-prelude": "^3.0.0",
     "purescript-console": "^3.0.0",
     "purescript-halogen": "^2.0.1",
-    "purescript-debug": "^3.0.0"
+    "purescript-debug": "^3.0.0",
+    "purescript-newtype": "^2.0.0"
   },
   "devDependencies": {
     "purescript-psci-support": "^3.0.0"
