@@ -13,9 +13,7 @@ data Query a
   = Toggle a
   | IsOn (Boolean -> a)
 
-data Message = Toggled Boolean
-
-myButton :: forall m. H.Component HH.HTML Query Unit Message m
+myButton :: forall m. H.Component HH.HTML Query Unit Void m
 myButton =
   H.component
     { initialState: const initialState
@@ -39,13 +37,10 @@ myButton =
         ]
         [ HH.text label ]
 
-  eval :: Query ~> H.ComponentDSL State Query Message m
+  eval :: Query ~> H.ComponentDSL State Query Void m
   eval = case _ of
     Toggle next -> do
-      state <- H.get
-      let nextState = not state
-      H.put nextState
-      H.raise $ Toggled nextState
+      void $ H.modify not
       pure next
     IsOn reply -> do
       state <- H.get
