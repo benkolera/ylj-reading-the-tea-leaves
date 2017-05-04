@@ -69,6 +69,9 @@ _*If you already have purescript, be sure to have 0.11.4 installed otherwise
 the code won't compile*_. If you get an error about not knowing about the
 RowCons type, you've got an older purescript 0.11.x version.
 
+Note: If you have a distribution with a ncurses-6 (archlinux and fedora)
+then you will need to install a [ncurses-5 compat layer](https://aur.archlinux.org/packages/ncurses5-compat-libs/). 
+
 `npm install -g bower purescript pulp`
 
 ### Editor

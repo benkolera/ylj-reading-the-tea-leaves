@@ -5,30 +5,20 @@ import Platform.Sub exposing (Sub)
 
 type Msg = Toggle
 
-type State = On | Off
-
-type alias Model = { state : State }
+type alias Model = Bool
 
 init : Model
-init = { state = On }
+init = True
 
 view : Model -> Html Msg
 view model = 
-  let msg = 
-        case model.state of
-            On -> "Hello"
-            Off -> "World"
+  let msg = if model then "Hello" else "World"
   in body [] [ button [ onClick Toggle ] [text msg] ]
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   case msg of
-    Toggle -> 
-        let newState = 
-                case model.state of
-                    On  -> Off 
-                    Off -> On
-        in ( { model | state = newState }, Cmd.none )
+    Toggle -> ( not model, Cmd.none )
 
 subscriptions : Model -> Sub Msg
 subscriptions model = Sub.none
