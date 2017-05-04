@@ -15,10 +15,11 @@ divisibleBy x n = x % n == 0
 
 view : Model -> Html Msg
 view model = 
-  let msg = if (divisibleBy model 3 && divisibleBy model 5) then "FizzBuzz" 
-            else if (divisibleBy model 3) then "Fizz"
-            else if (divisibleBy model 5) then "Buzz"
-            else toString model
+  let msg = case (divisibleBy model 3,divisibleBy model 5) of
+    (True,True) -> "FizzBuzz" 
+    (True,_)    -> "Fizz"
+    (_,True)    -> "Buzz"
+    _           -> toString model
   in body [] [ button [ onClick Toggle ] [text msg] ]
 
 update : Msg -> Model -> ( Model, Cmd Msg )
