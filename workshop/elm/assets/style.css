@@ -14,7 +14,7 @@
 
 html,body {
     color: #333;
-    background-color: #BCC8D1;
+    background-color: #DCE8F1;
 	margin: 0;
 	padding: 0;
     font-family: Roboto
@@ -31,11 +31,9 @@ h1,h2 {
   width: 300px;
   height: 110px;
   font-family: "Roboto Mono";
-  background: #3C434C;
+  background: #9CA3AC;
   border-radius: 2px;
-  box-shadow: 
-    0 2px 4px 0 rgba(0, 0, 0, 0.2),
-    0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 2px rgba(0,0,0,0.23);
 }
 
 .pomodoro .timer-selector {
@@ -45,6 +43,10 @@ h1,h2 {
     color: #FFF;
     width: 100%;
     height: 100%;
+}
+
+.pomodoro .timer-selector .timer-selector-msg {
+    padding-top: 2em;
 }
 
 .pomodoro .timer {
@@ -72,8 +74,7 @@ h1,h2 {
 	margin: 30px auto;
     max-width: 500px;
 	position: relative;
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
-	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 .todo-list {
@@ -115,10 +116,10 @@ h1,h2 {
 }
 
 .timer-start {
-    background-image: url("./assets/images/stopwatch.png");
+    background-image: url("./images/stopwatch.png");
     background-color: inherit;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     margin-right: 5px;
 }
 
