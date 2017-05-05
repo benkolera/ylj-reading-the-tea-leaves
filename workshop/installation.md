@@ -21,9 +21,12 @@ You'll need a laptop at the workshop with the following high level prerequisites
   - A text editor (Visual Studio Code works well)
   - Installing the elm and purescript dependencies in each of the projects
 
+If you have any issues with these steps, just raise a github issue and I'll help
+you out.
+
 ### Code
 
-If you have git, just `git clone git@github.com:benkolera/ylj-reading-the-tea-leaves.git`.
+If you have git, just `git clone https://github.com/benkolera/ylj-reading-the-tea-leaves.git`.
 
 If you don't have git and don't want to set that up, you can just 
 [download the code here](https://github.com/benkolera/ylj-reading-the-tea-leaves/archive/master.zip). 
