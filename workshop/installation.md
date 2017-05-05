@@ -21,9 +21,12 @@ You'll need a laptop at the workshop with the following high level prerequisites
   - A text editor (Visual Studio Code works well)
   - Installing the elm and purescript dependencies in each of the projects
 
+If you have any issues installing this, please raise an issue against the github tracker and I'll
+help out. 
+
 ### Code
 
-If you have git, just `git clone git@github.com:benkolera/ylj-reading-the-tea-leaves.git`.
+If you have git, just `git clone https://github.com/benkolera/ylj-reading-the-tea-leaves.git`.
 
 If you don't have git and don't want to set that up, you can just 
 [download the code here](https://github.com/benkolera/ylj-reading-the-tea-leaves/archive/master.zip). 
@@ -73,6 +76,8 @@ Note: If you have a distribution with a ncurses-6 (archlinux and fedora)
 then you will need to install a [ncurses-5 compat layer](https://aur.archlinux.org/packages/ncurses5-compat-libs/). 
 
 `npm install -g bower purescript pulp`
+
+We need bower for dependency management and pulp is a nice build tool that wraps the compiler nicely.
 
 ### Editor
 
