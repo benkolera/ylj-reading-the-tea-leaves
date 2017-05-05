@@ -40,6 +40,9 @@ First please install nodejs and NPM for your operating system.
 
 https://nodejs.org/en/download/package-manager/
 
+_If you have an older version of node already installed, be sure to update. You'll need
+npm 4.x to build purescript, so it's best to install up to node 7.10 or 6.10.3 (LTS)._
+
 If you are unfamiliar with Node and NPM and your global installatian
 of dependencies causes EACCESS errors, this is because NPM has been 
 set up to write to a global package directory that isn't in a folder
