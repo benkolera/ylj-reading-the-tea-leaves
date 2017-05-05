@@ -1,8 +1,9 @@
-# Workshop
+# ylj-reading-the-tea-leaves
 
-If you haven't already, please read [Installation
-Prereqs](./installation.md) for details.
+Talk and workshop for YOW Lambda Jam 2017
 
-## Steps
+## Acknowledgements
 
-Details coming soon once they are all finalised. :)
+- Stopwatch icon by "MadeByOliver" http://www.flaticon.com/free-icon/stopwatch_149318#term=timer&page=1&position=6
+- Todo list inspired by Elm TodoMVC: https://github.com/evancz/elm-todomvc/blob/master/Todo.elm
+- Elm TodoMVC implemented the quintessential standardised UI framework comparison tool: http://todomvc.com/
