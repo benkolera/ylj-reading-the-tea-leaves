@@ -21,8 +21,8 @@ You'll need a laptop at the workshop with the following high level prerequisites
   - A text editor (Visual Studio Code works well)
   - Installing the elm and purescript dependencies in each of the projects
 
-If you have any issues installing this, please raise an issue against the github tracker and I'll
-help out. 
+**_If you have any issues installing this, please raise an issue against the github tracker and I'll
+help out._**
 
 ### Code
 
