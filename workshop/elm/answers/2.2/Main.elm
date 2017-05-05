@@ -3,11 +3,8 @@ import Html.Attributes as HA
 import Html.Events as HE
 import Platform.Cmd exposing (Cmd)
 import Platform.Sub exposing (Sub)
-import Json.Decode as Json
 
-type Msg 
-  = UpdateInput String
-  | NewTodo
+type Msg = Noop
 
 type alias Todo = 
   { completed : Bool
@@ -15,14 +12,10 @@ type alias Todo =
   }
 
 type alias Model = 
-  { editingString : String 
-  , todos : List Todo 
-  }
+  { todos : List Todo }
 
 init : Model
-init =  
-  { editingString = ""
-  , todos = 
+init = { todos = 
   [ { completed = False , title = "Write Talk" }
   , { completed = True  , title = "Propose Talk" }
   ]}
@@ -37,23 +30,13 @@ todoView t = H.li []
 view : Model -> H.Html Msg
 view model = H.body []
   [ H.section [HA.class "todo"]
-    [ H.input 
-      [ HA.class "new-todo"
-      , HA.placeholder "What needs to be done?"
-      , HA.autofocus True
-      , HA.name "newTodo"
-      , HE.onInput UpdateInput
-      , onEnter NewTodo
-      ] []
-    , H.ul [HA.class "todo-list"] <| List.map todoView model.todos 
-    ]
+    [ H.ul [HA.class "todo-list"] <| List.map todoView model.todos ]
   ]
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   case msg of
-    UpdateInput input -> ( model, Cmd.none )
-    NewTodo           -> ( model, Cmd.none )
+    Noop -> ( model, Cmd.none )
 
 subscriptions : Model -> Sub Msg
 subscriptions model = Sub.none
@@ -66,14 +49,3 @@ main =
     , update = update
     , subscriptions = subscriptions
     }
-
-onEnter : Msg -> H.Attribute Msg
-onEnter msg =
-    let
-        isEnter code =
-            if code == 13 then
-                Json.succeed msg
-            else
-                Json.fail "not ENTER"
-    in
-        HE.on "keydown" (Json.andThen isEnter HE.keyCode)

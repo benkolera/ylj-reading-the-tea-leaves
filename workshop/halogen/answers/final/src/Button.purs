@@ -26,12 +26,12 @@ myButton =
   where
 
   initialState :: State
-  initialState = false
+  initialState = true
 
   render :: State -> H.ComponentHTML Query
   render state =
     let
-      label = if state then "World" else "Hello"
+      label = if state then "Hello" else "World"
     in
       HH.button
         [ HP.title label

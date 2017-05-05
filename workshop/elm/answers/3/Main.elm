@@ -42,6 +42,7 @@ view model = H.body []
       , HA.placeholder "What needs to be done?"
       , HA.autofocus True
       , HA.name "newTodo"
+      , HA.value model.editingString
       , HE.onInput UpdateInput
       , onEnter NewTodo
       ] []
@@ -52,8 +53,13 @@ view model = H.body []
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   case msg of
-    UpdateInput input -> ( model, Cmd.none )
-    NewTodo           -> ( model, Cmd.none )
+    UpdateInput input -> 
+      ( { model | editingString = input }, Cmd.none )
+    NewTodo           -> 
+      ( { model 
+        | editingString = ""
+        , todos = { completed = False, title = model.editingString } :: model.todos 
+      } , Cmd.none )
 
 subscriptions : Model -> Sub Msg
 subscriptions model = Sub.none

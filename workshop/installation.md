@@ -21,8 +21,8 @@ You'll need a laptop at the workshop with the following high level prerequisites
   - A text editor (Visual Studio Code works well)
   - Installing the elm and purescript dependencies in each of the projects
 
-If you have any issues with these steps, just raise a github issue and I'll help
-you out.
+**_If you have any issues installing this, please raise an issue against the github tracker and I'll
+help out._**
 
 ### Code
 
@@ -39,6 +39,9 @@ I invaribly make last minute changes. :)
 First please install nodejs and NPM for your operating system.
 
 https://nodejs.org/en/download/package-manager/
+
+_If you have an older version of node already installed, be sure to update. You'll need
+npm 4.x to build purescript, so it's best to install up to node 7.10 or 6.10.3 (LTS)._
 
 If you are unfamiliar with Node and NPM and your global installatian
 of dependencies causes EACCESS errors, this is because NPM has been 
@@ -77,6 +80,8 @@ then you will need to install a [ncurses-5 compat layer](https://aur.archlinux.o
 
 `npm install -g bower purescript pulp`
 
+We need bower for dependency management and pulp is a nice build tool that wraps the compiler nicely.
+
 ### Editor
 
 You can use whatever editor you want, but if you want something that works
@@ -106,7 +111,7 @@ is all good and that refreshing your browser brings that change into the app.
 
 ### Purescript Dependencies
 
-Run `bower install` to bring in all of the purescript dependencies.
+In the workshop/halogen directory, run `bower install` to bring in all of the purescript dependencies.
 
 `pulp server` ought to start up a webserver that you can hit at http://localhost:1337/test.html .
 
