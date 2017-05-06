@@ -1,7 +1,5 @@
 # Workshop Prerequisites
 
-TODO: Test on windows and mac.
-
 In the workshop, we are going to be writing lots of code in both Elm 
 and purescript. We're not guaranteed good Internet at the workshop, so
 the workshop will need a little bit of preplanning and installation to 
@@ -95,8 +93,6 @@ https://code.visualstudio.com/docs/setup/setup-overview
 If you install "elm", "elm-format", "Purescript IDE" extensions you'll be in
 a good spot to get going. Installing "Vim" is a good way to not get mad as VSCode
 if you are like me have vim bindings in permanent muscle memory. :)
-
-TODO: Test this in windows that VSCode can find all the tools.
 
 ### Elm Dependencies
 
