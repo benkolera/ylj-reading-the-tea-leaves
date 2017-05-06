@@ -7,14 +7,12 @@ import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 
-type State = Boolean
+type State = { on :: Boolean }
 
 data Query a
   = Toggle a
 
-data Message = Toggled Boolean
-
-button :: forall m. H.Component HH.HTML Query Unit Message m
+button :: forall m. H.Component HH.HTML Query Unit Void m
 button =
   H.component
     { initialState: const initialState
@@ -25,21 +23,22 @@ button =
   where
 
   initialState :: State
-  initialState = false
+  initialState = { on : false }
 
   render :: State -> H.ComponentHTML Query
   render state =
     let
-      label = if state then "World" else "Hello"
+      label = if state.on then "World" else "Hello"
     in
       HH.button
         [ HP.title label
+        , HP.class_ (H.ClassName "big-button")
         , HE.onClick (HE.input_ Toggle)
         ]
         [ HH.text label ]
 
-  eval :: Query ~> H.ComponentDSL State Query Message m
+  eval :: Query ~> H.ComponentDSL State Query Void m
   eval = case _ of
     Toggle next -> do
-      H.modify not
+      H.modify (\ s -> s { on = not s.on } )
       pure next

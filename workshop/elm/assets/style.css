@@ -17,7 +17,17 @@ html,body {
     background-color: #DCE8F1;
 	margin: 0;
 	padding: 0;
-    font-family: Roboto
+    font-family: Roboto;
+    background-image: url('./images/logo.png');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 50px;
+}
+
+.big-button {
+    margin: 20px 20px;
+    font-size: 2em;
 }
 
 h1,h2 {

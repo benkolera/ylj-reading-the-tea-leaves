@@ -1,41 +1,34 @@
-import Html exposing (Html,body,button,text)
-import Html.Events exposing (onClick)
+import Html as H
+import Html.Attributes as HA
+import Html.Events as HE
 import Platform.Cmd exposing (Cmd)
 import Platform.Sub exposing (Sub)
 
 type Msg = Toggle
 
-type State = On | Off
-
-type alias Model = { state : State }
+type alias Model = { on : Bool }
 
 init : Model
-init = { state = On }
+init = { on = True }
 
-view : Model -> Html Msg
+view : Model -> H.Html Msg
 view model = 
-  let msg = 
-        case model.state of
-            On -> "Hello"
-            Off -> "World"
-  in body [] [ button [ onClick Toggle ] [text msg] ]
+  let msg = if model.on then "Hello" else "World"
+  in H.body []
+    [ H.button [ HA.class "big-button", HE.onClick Toggle ] 
+      [H.text msg] ]
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   case msg of
-    Toggle -> 
-        let newState = 
-                case model.state of
-                    On  -> Off 
-                    Off -> On
-        in ( { model | state = newState }, Cmd.none )
+    Toggle -> ( { model | on = not model.on }, Cmd.none )
 
 subscriptions : Model -> Sub Msg
 subscriptions model = Sub.none
 
 main : Program Never Model Msg
 main =
-  Html.program
+  H.program
     { init = (init, Cmd.none)
     , view = view
     , update = update

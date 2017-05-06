@@ -1,0 +1,6 @@
+[submodule "workshop/elm/solutions"]
+	path = workshop/elm/solutions
+	url = git@github.com:benkolera/ylj-reading-the-tea-leaves-elm.git
+[submodule "workshop/halogen/solutions"]
+	path = workshop/halogen/solutions
+	url = git@github.com:benkolera/ylj-reading-the-tea-leaves-halogen.git
