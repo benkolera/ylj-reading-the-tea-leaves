@@ -135,7 +135,6 @@ data Msg next
 
 eval :: forall a. Query a -> H.ComponentDSL State Query Void m a
 eval = case _ of
-    -- Do syntax gives us 
     Toggle next -> do
       _ <- H.modify not
       pure next
@@ -178,4 +177,8 @@ has been clicked (test by running `pulp server` and hitting [the test page](http
   - If it is just a multiple of 5, then the label should be "Buzz"
   - Else the label should be the count of clicks.
 
-Hint: This is exactly the same as with Elm. Just be cautioned that Purescript doesn't have syntax for tuples if you used a pattern match on a (Bool,Bool) in elm! Tuple Boolean Boolean is a tuple without syntax.
+Hints: 
+
+  - Follow the same process as with elm.
+  - Modulo in Purescript is `mod 7 2` (returns 1)
+  - show will turn the Int to a String

@@ -49,8 +49,13 @@ learn what you want to learn.
 
 As time progresses in the workshop, I will be working through the answers to
 each step up on the projector. If you get stuck don't be afraid to stick your
-hand up and ask me earlier, or you can also take a peek at the /halogen-final 
-and /elm-final folders in this repo to peek at my final solution. 
+hand up and ask me earlier, or take a peek in the halogen/solutions and elm/solutions
+submodules. There should be a tag in each of those submodules that lines up to the 
+exercise.
+
+There is also more content in this workshop that we'll get done, so don't worry
+if you don't get it all done. It'll be all available to work through later if 
+you would like to.
 
 - [Step 0 - Language Basics](./0-language.md)
 - [Step 1 - Framework Basics](./1-framework.md)
