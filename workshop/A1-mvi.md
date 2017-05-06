@@ -13,6 +13,58 @@ The basic shape of this pattern is as follows:
 
 ![model view intent](./images/mvi.png?raw=true)
 
+### View
+
+The critical component of MVI is the view function that takes some kind of state
+and translates it to a virtual dom tree. Virtual DOM then takes care of patching 
+the actual DOM in the most efficient way possible from the difference between 
+our previous VirtualDOM tree and this new one. This would not be possible without
+the ability of VirtualDOM to only make patches rather than recreate the DOM every 
+time. It's cheap enough for us to generate the VDom true every time, but creating
+/changing things in the actual DOM is still slow.
+
+React started this idea of creating pure view functions and having virtual dom
+to sort out the DOM mutation. 
+
+Abstracting away the DOM completely means that there is absolutely no way for 
+our application code to store state in the DOM anymore, removing that big ugly
+global variable from our worries even compared to data-binding style frameworks
+like angular and backbone. Better still, there is the promise of abstracting away 
+the underlying UI entirely and one day being able to reuse chunks of your UI for
+mobile and Web. 
+
+The downside to this abstraction, of course, is that any UI components that aren't built
+around your MVI framework are harder to integrate (like a JS based text editor) since 
+you have to make sure that they behave in a VirtualDom environment. Most frameworks 
+have abstractions to be able to integrate these things: you just need to be careful
+at these integration points. See https://github.com/slamdata/purescript-ace-halogen/blob/master/src/Ace/Halogen/Component.purs
+for an example in halogen.
+
+### Messages / Actions
+
+The other critical part of MVI is not mutating the component / app state directly but instead
+passing actions defined by types that clearly communicate all of the state changes in the system.
+
+Early react didn't quite have this. It encouraged people to minimise the use of mutable state
+and instead passing immutable properties and callback functions down, but that callback could
+still do anything and wasn't as clear of a communication tool. 
+
+This allows us to completely separate our state changes from the UI and also allows us to 
+look at a component's message type and be able to reason about all the things that can go on
+in there. Gone are the days from angular where two-way bindings and random watches on the scope
+meant that it was sometimes very difficult to track down or reason about the state changes 
+going on in an app.
+
+A benefit of this model of only passing around events is that it gels a lot better with 
+optimistic UI updates / UIs that can handle being offline for brief periods and catch 
+back up afterwards. Having an event rather than a mutating callback means that we can apply
+the event to update our UI before we've even sent off the XHR. 
+
+### Update Function (Redux Term: Reducer)
+
+The update function / reducer is simply a function from a Msg/Event/Action and the previous
+model state to calculate the next model state.
+
 ## Elm 
 
 If you take a look at http://package.elm-lang.org/packages/elm-lang/html/1.1.0/Html-App#program 
@@ -52,19 +104,7 @@ has been clicked and:
   - If it is just a multiple of 5, then the label should be "Buzz"
   - Else the label should be the count of clicks.
 
-Hints: 
-
-- Add `clicks : Int` to the Model.
-- Update the update functioon to count the clicks
-- To update multiple fields with a record `{ x | fielda = newA, fieldB = newB }`
-- Modulo in Elm is `(%)` (e.g: `7 % 2` results in 1)
-- You can do multiple if then else branches like
-```elm
-if      x < 0 then "negative"
-else if x > 0 then "positive"
-else               "zero"
-```
-- toString (from Prelude) will turn an Int into a String
+Note: Modulo is `(%)` in Elm. Change the state from Bool to Int and follow the types. :)
 
 ## Halogen
 
@@ -74,7 +114,7 @@ Halogen is a tiny bit more complicated, but is more or less the same shape:
 type ComponentSpec h s f i o m =
   { initialState :: i -> s
   , render :: s -> h Void (f Unit)
-  , eval :: f a -> ComponentDSL s f o m a
+  , eval :: f ~> ComponentDSL s f o m
   , receiver :: i -> Maybe (f Unit)
   }
 ```  
@@ -99,6 +139,10 @@ as we play around with it. A visual approximation of a halogen component is like
 
 ![halogen component](./images/halogen.png?raw=true)
 
+If we are going to be pedantic about terminology, this actually makes halogen 
+more like [The Flux Architecture](https://github.com/facebook/flux/tree/master/examples/flux-concepts) 
+than [Redux](http://redux.js.org/) since redux is defined by only having a store & reducer in the
+app.
 
 ### ComponentDSL
 
@@ -129,13 +173,10 @@ bleeds into our algebra because halogen actually allows the query algebra to ret
 to the caller once the query has been evaluated. See:
 
 ```haskell
-data Msg next 
-  = Toggle next 
-  | GetState (Boolean -> next) -- Returns the state to the parent
+data Msg next = Toggle next | GetState (Boolean -> next)
 
 eval :: forall a. Query a -> H.ComponentDSL State Query Void m a
 eval = case _ of
-    -- Do syntax gives us 
     Toggle next -> do
       _ <- H.modify not
       pure next
@@ -178,4 +219,5 @@ has been clicked (test by running `pulp server` and hitting [the test page](http
   - If it is just a multiple of 5, then the label should be "Buzz"
   - Else the label should be the count of clicks.
 
-Hint: This is exactly the same as with Elm. Just be cautioned that Purescript doesn't have syntax for tuples if you used a pattern match on a (Bool,Bool) in elm! Tuple Boolean Boolean is a tuple without syntax.
+Hint: This is exactly the same as with Elm. Just be cautioned that Purescript doesn't have syntax for tuples
+if you used a pattern match on a (Bool,Bool) in elm! Tuple Boolean Boolean is a tuple without syntax.

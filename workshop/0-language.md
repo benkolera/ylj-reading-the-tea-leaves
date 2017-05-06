@@ -1,98 +1,89 @@
+# Step 0 - Language & VSCode Intro
 
-## Step 0 - Language Intro
+In this step we are going to poke around through the basics of
+Elm and Purescript and the tooling that exists in VSCode for
+them.
 
-If you haven't played with Elm or Purescript before, there are a few things that
-you should probably know before proceeding. That's what this section is about!
-You're probably OK just skimming this section and coming back to it when you need
-it. 
+If you've done some Haskell before, you'll probably be 
+able to charge on without this section.
 
-Given that we are at Lambda Jam and we have a lot to get done in the workshop,
-I've needed to make some assumptions that you have a some experience 
-with navigating and writing purely functional code. If at any point get to a 
-block of "I know how i'd do this in an imperative language, but I'm stuck here"
-please just throw your hand up and we'll work through it.
+## Elm 
 
-### Elm
+### Functions
 
-Elm is a ML like language. There are no typeclasses or ad-hoc polymorphism, so 
-you'll find all of the functions you can use for a type in the module for that
-type. The standard library is quite spartan, so the you may find that you need
-to go to an *Extras package (e.g: If there isn't a function in the Maybe module
-, you'll probably find what you want in MaybeExtras) to get extra useful functions.
-
-The workshop code has ListExtras and MaybeExtras already around (you need MaybeExtra 
-even to get `unwrap :: b -> (a -> b) -> Maybe a -> b`, so feel free to use them
-as much as you like.
-
-#### Primitives
-
-  - String : `"foo" : String"`
-  - Int : `1 : Int`
-  - Number : `1.0 : Number`
-  - List : `["foo","bar"] : List String`
-
-(++) will append strings or lists for you. Note the type for List is `List a` and not `[a]`. 
-
-toString (prelude function) will take most things and print it to a string.
-
-You can't mix integers and numbers in arithmetic. round will go from Number -> Int. 
-`(%)`  / modulo and `(\\)` / integer division only work on Ints.
-
-#### Functions
-
-Type ascriptions are a single `:` rather than `::` in haskell. Otherwise they are the
-same as haskell. There is no pattern matching in the function definition, so you have
-to do a case inside the function instead.
+We define functions like this:
 
 ```elm
-maybe : b -> (a -> b) -> Maybe a -> b
-maybe def f m = case m of
-  Nothing -> def
-  Just a  -> f a
+-- Add1 is a function that takes an int and returns another int
+add1 : Int -> Int
+add1 x = x + 1
+
+-- And we apply functions with a space 
+add1 10
+-- => 11
+-- Application is the highest precedence which can tricky to get used to
+add1 10 + 1
+-- is actually
+(add1 10) + 1
+-- To get things the other way around:
+add1 (10 + 1)
+
+List.map add1 [1,2,3]
+-- => [2,3,4]
+-- You can make anonymous functions too. This is the same thing:
+List.map (\x = x + 1) [1,2,3]
 ```
-
-#### Data Definitions & Records 
-
-There are no newtypes: just datatype declarations and type aliases. However, Elm
-doesn't use the `data` keyword for datatypes. 
+### Data Types
 
 ```elm
-type Maybe a = Nothing | Just a
+-- We can create algebraic data types where a type can be inhabited by 
+-- one of the mentioned constructors.
+type Shape = Square Float | Rectangle Float Float | Circle Float
 
-type alias Option a = Maybe a
-```
+-- Which we can then pattern match to figure out which constructor we have:
+area : Shape -> Float 
+area shape = case shape of
+  Square side            -> side^2
+  Rectangle length width -> length * width
+  Circle radius          -> pi * radius^2
 
-Elm has the concept of a record, which can either be open or closed. You could
-write the types inline on your function types, but it helps to alias them. You 
-access fields with `.` and update with a curly brace and pipe syntax. *Please note
-that you cannot nest the update syntax!*
-
-```elm
-type alias Person = { name: String, age: Int } 
-type alias HasName b = { b | name:String }
-
-yellName : HasName b -> HasName b
-yellName rec = { rec | name = String.toUpper rec.name }
+-- We can also create records
+type alias Person = 
+  { name : String
+  , age  : Int
+  }
 
 ben : Person
 ben = { name = "Ben Kolera", age = 30 }
 
-yellName ben
--- => { name = "BEN KOLERA", age = 30 }
+yellName : Person -> Person
+yellName p = { p | name = String.toUpper p.name }
 ```
 
-#### Module Imports
+### Lists
 
-Most Elm guides recommend importing modules qualified. With the lack of typeclasses, 
-you need to do this otherwise you get too many clashes (e.g. List.map vs Maybe.map vs Cmd.map, etc).
+Lists are created in a square braced list:
 
-By default, an import is qualified. You need to explicitly put `exposing` to import symbols into 
-the namespace.
-
+```elm
+numbers = [1337,2020]
+-- And they can be transformed using the List.map function
+-- a and b are type parameters.
+-- List.map : (a -> b) -> List a -> List b
+-- We append lists with ++
+List.map toString (numbers ++ [1,2,3])
+-- ["1337","2020","42","1","2","3"]
 ```
-import Html exposing (Html,body)
-import Maybe.Extra as MaybeExtra
-import State
+
+### Imports
+
+```elm
+-- We can import elm things qualified
+import String as S
+S.toUpper "foo"
+
+-- or import the symbols directly
+import String (toUpper)
+toUpper "foo"
 ```
 
 #### Debugging
@@ -103,6 +94,13 @@ If you need to debug or stub out a function that you haven't implemented yet, th
   - `Debug.watch : String -> a -> a` : Watches that value in the time travelling debugger.
   - `Debug.crash : String -> a` : Crashes the program with an error (if you haven't written that code and need code to compile)
 
+Using these functions is done like:
+
+```elm
+foo x = add1 (Debug.log "X" x)
+-- This will add1 x AND Console.log( "X: ", x )
+```
+
 #### Running
 
 The best way to run elm is via elm-reactor, as per the installation instructions.
@@ -111,98 +109,73 @@ That'll have a webserver running that will recompile when you refresh, show comp
 errors, etc. It also has a time travelling debugger in it that you can inspect the 
 state of your app and the events flowing through it.
 
-In VsCode, you can run this by running the `Elm: Reactor Start` command (Ctrl-Shift-P).
+In VsCode, you can run this by running the `Elm: Reactor Start` command (Cmd/Ctrl-Shift-P).
 
-### Purescript
+## Purescript 
 
-Purescript is very haskelly but strict, uses very JS like primitives and has row types
-for describing effects and fields in a record. 
+### Functions
 
-There is no implicit prelude, so you'll need to import Prelude in every file.
-
-#### Primitives 
-
-  - `"foo" :: String`
-  - `5 :: Int`
-  - `5.0 :: Number`
-  - `[1,2,3] :: Array Int`
-  - ` 1 : 2 : 3 : List.Nil :: List Int`
-
-Everything maps to the JS things underneath except lists. Note, arrays are JS 
-arrays and have horrible complexity for head / tail operations. Unfortunately,
-the halogen HTML functions take arrays instead of lists (probably due to the
-nicer syntax) so we have to wear a fair few arrays in our code.
-
-#### Functions
-
-Type ascriptions are `::` and you need an explicit forall on any type params.
-
-You can also pattern match in the function definition like haskell.
+Functions are much the same except that type ascription is done with two colons
+and you need to quantifier type params with a forall.
 
 ```haskell
-maybe :: forall a b. b -> (a -> b) -> Maybe a -> b
-maybe def _ Nothing = def
-maybe _ f (Just a)  = f a
+-- Add1 is a function that takes an int and returns another int
+add1 :: Int -> Int
+add1 x = x + 1
+
+doubleArray :: forall a. Array a -> Array a
+doubleArray arr = arr ++ arr
+
+-- Anonymous functions can be created in two ways:
+map (\ x -> x + 1) [1,2,3]
+map (_ + 1) [1,2,3]
 ```
 
-#### Data Declarations and Records
-
-Everything is how you would expect it in Haskell.
+### Data Types
 
 ```haskell
-data Maybe a = Nothing | Just a
-type Option a = Maybe a
-type Option = Maybe    -- Partial application also works
-newtype First a = First (Maybe a)
-```
+-- Instead of type, we make algebraic data types with the data keyword
+data Shape = Square Number | Rectangle Number Number | Circle Number
 
-Except for deriving typeclass instances instances must have names
-and you use the Haskell StandaloneDeriving notation.
+-- Which we can then pattern match in two ways:
+area :: Shape -> Number
+area shape = case shape of
+  Square side            -> side^2
+  Rectangle length width -> length * width
+  Circle radius          -> pi * radius^2
 
-```haskell
-newtype TodoSlot = TodoSlot Todo.Id
-derive instance eqTodoSlot :: Eq TodoSlot
-derive instance ordTodoSlot :: Ord TodoSlot
-```
+-- We can also create records but there is no alias keyword
+type Person = 
+  { name :: String
+  , age  :: Int
+  }
 
-Records are the same as elm, but syntactically different:
-
-```haskell
-type Person = { name :: String, age:: Int } 
-type HasName b = { name :: String | b }
-
-yellName :: forall b. HasName b -> HasName b
-yellName rec = rec { name = String.toUpper rec.name }
-
+-- Creating values with a single colon
 ben :: Person
 ben = { name : "Ben Kolera", age : 30 }
 
-yellName ben
--- => { name = "BEN KOLERA", age = 30 }
+yellName :: Person -> Person
+yellName p = p { name = toUpper p.name }
 ```
 
-#### Modules and Imports
+### Imports
 
-Much the same as haskell just without the `qualified` keyword.
+If you have a function that isn't imported, you can press Cmd/Ctrl-Shift-P and run 
+the command "Purescript - Add Explicit Import". If it can find that function in 
+a module that is installed, it will allow you to pick that module to import the symbol from.
+
+Just make sure you have Prelude imported in every file, else you wont even have numbers
+or ints in scope.
 
 ```haskell
-import Prelude   -- All prelude symbols included unqualified in this file
-import Data.Monoid (class Monoid) -- Imports monoid typeclass
-import Data.Foldable (class Foldable,fold)
-import Data.Array as Arr -- Arr.length will work
-
-foo :: forall f a. Foldable f => Monoid a => f a -> a
-foo = fold
+-- Imports all of the prelude functions into this namespace.
+import Prelude 
+-- Qualified
+import Data.String as S
+S.toUpper "foo"
+import Data.String (toUpper)
+toUpper "foo"
 ```
-
-#### Miscelaneous Difference from Haskell 
-
-The typeclass hierarchy doesn't have a lot of the cruft that the Haskell prelude does.
-
-  - Monoid `(<>)` is used everywhere instead of having `(++)` for lists / arrays.
-  - Semigroupoid composition `(<<<)` or `(>>>)` for composing functions instead of `(.)`
-  - There aren't any standard functions hardcoded to list/array. Look in foldable instead.
-  - No `return`, `(>>)`, etc that are all superceded by Apply/Applicative things. 
 
 #### Debugging
 
@@ -210,7 +183,6 @@ While you need to track effects for real code in purescript, there are a few han
 if you need to inspect a value.
 
   - `Debug.trace : String -> (Unit -> a) -> a` : Logs to the JS console with the label and JS console representation.
-  - `Debug.traceShow : Show a => a -> (Unit -> b) -> b` : Logs to the console with a label and the string representation from show.
   - `Debug.spy : a -> a` : Console.log that passes the value through.
 
 #### Running
@@ -218,4 +190,4 @@ if you need to inspect a value.
 As shown in the setup instructions, running `pulp server` will start webserver that will
 compile your code in the background ready for you to refresh the page.
 
-In vscode, you can happily run that inside the terminal window if you go View > Integrated Terminal.
+In vscode, you can happily run that inside the terminal window if you go Ctrl-\` or Cmd-\`

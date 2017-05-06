@@ -52,24 +52,25 @@ each step up on the projector. If you get stuck don't be afraid to stick your
 hand up and ask me earlier, or you can also take a peek at the /halogen-final 
 and /elm-final folders in this repo to peek at my final solution. 
 
-[Step 0 - Language Basics](./0-language.md)
+- [Step 0 - Language Basics](./0-language.md)
+- [Step 1 - Framework Basics](./1-framework.md)
+- [Step 2 - Static Todo List](./2-static-todos.md)
+- [Step 3 - New Task Input](./3-input.md)
+- [Step 4 - Refactor](./4-refactor-todos.md)
+- [Step 5 - Timer UI](./5-static-timer.md)
+- [Step 6 - Timer Ticks](./6-ticker.md)
+- [Step 7 - Start Timer From Todos](./7-start-timer.md)
+- [Step 8 - Breaks](./8-breaks.md)
+- [Step 9 - Fancier Todo List](./9-fancy-list.md)
+- [Step ??? - And further ideas](./10-further.md)
 
-[Step 1 - Framework Basics](./1-framework.md)
+## Appendices & Reference Material
 
-[Step 2 - Static Todo List](./2-static-todos.md)
-
-[Step 3 - New Task Input](./3-input.md)
-
-[Step 4 - Refactor](./4-refactor-todos.md)
-
-[Step 5 - Timer UI](./5-static-timer.md)
-
-[Step 6 - Timer Ticks](./6-ticker.md)
-
-[Step 7 - Start Timer From Todos](./7-start-timer.md)
-
-[Step 8 - Breaks](./8-breaks.md)
-
-[Step 9 - Fancier Todo List](./9-fancy-list.md)
-
-[Step ??? - And further ideas](./10-further.md)
+- [Appendix A - Language Details & Differences](./A1-language.md)
+- [Appendix B - MVI Details and Differences between Halogen and Elm](./A2-mvi.md)
+- [Elm Core Docs](http://package.elm-lang.org/packages/elm-lang/core/latest)
+- [Elm HTML Docs](http://package.elm-lang.org/packages/elm-lang/html/latest/)
+- [Elm Tutorial](https://guide.elm-lang.org/core_language.html)
+- [Purescript Prelude Docs](https://pursuit.purescript.org/packages/purescript-prelude/3.0.0)
+- [Halogen Docs](https://pursuit.purescript.org/packages/purescript-halogen/2.0.1)
+- [Purescript Book](https://leanpub.com/purescript/read)
