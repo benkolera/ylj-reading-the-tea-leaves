@@ -1,0 +1,506 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/bens.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<section data-background-image="./lib/images/Tea_leaf_reading.jpg">
+					<div class="title-panel">
+						<h1>Reading the TEA Leaves</h1>
+						<h2>An introduction to Elm and Halogen</h2>
+						<br />
+						<p>By
+							<a href="https://twitter.com/benkolera">@benkolera</a> for YOW Lambda Jam 2017</p>
+					</div>
+					<aside class="notes">
+						<p>Good morning everyone!</p>
+						<p>Welcome to my talk / workshop series introducing Elm and Halogen and why you may want to be excited about them.</p>
+					</aside>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Me</h1>
+					<aside class="notes">
+						<p>But first I should introduce myself and give you some flimsy reason for you to be interested in my opinions.</p>
+						<p>First and foremost, I am a guy who desperately needs to change his linked in photo.</p>
+					</aside>
+				</section>
+				<section>
+					<p>A guy who desperately needs to change his LinkedIn photo!</p>
+					<img src="lib/images/ben.jpg" alt="Ben 10 years ago" class="fragment" data-fragment-index=0>
+					<p class="red crazy fragment" data-fragment-index=0>WAT?!?</p>
+					<aside class="notes">
+						<p>If for some reason you don't prefer older, hairier Ben, I wont be offended if you head out now. ;)</p>
+					</aside>
+				</section>
+				<section>
+					<img src="lib/images/ephox-logo-light.png" alt="Ephox logo" class="no-border">
+					<div class="fragment" style="margin-top: 1em">
+						<img src="lib/images/tinymce.svg" alt="TinyMCE by Ephox Logo" class="no-border" style="width: 42%; margin-left: -1%;">
+						<img src="lib/images/textbox.png" alt="Textbox.io by Ephox Logo" class="no-border" style="width: 42%; margin-left: 5%;">
+					</div>
+					<aside class="notes">
+						<p>I work for a company called ephox.</p>
+						<p>We make one of the most deceptively frustrating things to do on the web: WYSIWYG HTML editors.</p>
+						<p>And we are masochistic enough to have not only 1, but two rich text editors.</p>
+						<p>We're always interested in chatting to people that both think functionally and enjoy using the web in anger. So get
+							in touch if you're a weirdo too. :)</p>
+					</aside>
+				</section>
+				<section>
+					<h2>I also coorganise the Brisbane FP User Group</h2>
+				</section>
+				<section>
+					<h2>I am a stickler for abstractions</h2>
+				</section>
+				<section>
+					<h2>Especially abstractions that give a program "just enough power"</h2>
+				</section>
+				<section>
+					<h2>Whilst not making programs harder to reason about by giving them<br />"too much" power</h2>
+				</section>
+				<section>
+					<h2>Read: I am an insufferable functional programming pedant</h2>
+				</section>
+				<section>
+					<h2>I love things that allow me to reason about my program better:</h2>
+					<ul>
+						<li class="fragment">Algebraic Data Types</li>
+						<li class="fragment">Tracked (Extensible) Effects</li>
+						<li class="fragment">Classy Lenses</li>
+						<li class="fragment">Free Monad Based DSLs</li>
+						<li class="fragment">FRP</li>
+						<li class="fragment">etc. :)</li>
+					</ul>
+				</section>
+				<section>
+					<h2>I love these things because most of the time and money spent on software is in maintenance</h2>
+				</section>
+				<section>
+					<h2>And the easier code is to reason about, the safer it is to refactor and compose</h2>
+				</section>
+				<section>
+					<h2>And we are going to want to compose and refactor <em style="text-decoration: underline; font-size: 1.2em;">a lot</em>						once the code grows</h2>
+				</section>
+				<section>
+					<h2>This is especially important with UIs, as they are on the bear the churn of human inconsistency and fickleness</h2>
+				</section>
+				<section>
+					<h2>So I feel like getting our UIs more functional is an exceptionally fun and interesting task</h2>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Web UIs</h1>
+				</section>
+				<section>
+					<h2>Historically, have not had the nice things that we want</h2>
+				</section>
+				<section>
+					<h2>But it is slowly getting better</h2>
+					<h3 class=fragment>( and this is awesome! )</h3>
+				</section>
+				<section>
+					<h2>Lets review some of the history of our JS UI journey so far.</h2>
+				</section>
+				<section data-transition="fade-in" class="timeline-slide">
+					<ul class="timeline">
+						<li class="current">
+							<div class="timestamp"><span class="date">1995<span></div>
+							<div class="status"><h4>DHTML</h4></div>
+						</li>
+						<li class="future">
+							<div class="timestamp"><span class="date">2005<span></div>
+							<div class="status"><h4>AJAX</h4></div>
+						</li>
+						<li class="future">
+							<div class="timestamp"><span class="date">2010<span></div>
+							<div class="status"><h4>Angular</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2013<span></div>
+							<div class="status"><h4>React</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2014<span></div>
+							<div class="status"><h4>Elm</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2015<span></div>
+							<div class="status"><h4>Redux</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2016<span></div>
+							<div class="status"><h4>Halogen</h4></div>
+						</li>
+					</ul>
+					<p class="timeline-desc">
+						JS was born for the humble goal of making pages more dynamic (animation, form validation, etc).
+						<br />
+						<br />
+						Focused on enhancing the DOM. All of the state was tied into globals and the DOM.
+
+					</p>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section data-transition="fade-in" class="timeline-slide">
+					<ul class="timeline">
+						<li class="">
+							<div class="timestamp"><span class="date">1995<span></div>
+							<div class="status"><h4>DHTML</h4></div>
+						</li>
+						<li class="current"future>
+							<div class="timestamp"><span class="date">2005<span></div>
+							<div class="status"><h4>AJAX</h4></div>
+						</li>
+						<li class="future">
+							<div class="timestamp"><span class="date">2010<span></div>
+							<div class="status"><h4>Angular</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2013<span></div>
+							<div class="status"><h4>React</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2014<span></div>
+							<div class="status"><h4>Elm</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2015<span></div>
+							<div class="status"><h4>Redux</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2016<span></div>
+							<div class="status"><h4>Halogen</h4></div>
+						</li>
+					</ul>
+					<p class="timeline-desc">
+						Then our Javascript started making backend calls.
+						<br /><br />
+						Our pages started to get more and more complicated, but our state was still tied to the DOM.
+						<br /><br />
+						Things quickly became a tangled mess of DOM state and business logic tied up in event handlers.
+					</p>
+					<aside class="notes">
+						jQuery, prototype, dojo, mootools
+					</aside>
+				</section>
+				<section data-transition="fade-in" class="timeline-slide">
+					<ul class="timeline">
+						<li class="">
+							<div class="timestamp"><span class="date">1995<span></div>
+							<div class="status"><h4>DHTML</h4></div>
+						</li>
+						<li class=""future>
+							<div class="timestamp"><span class="date">2005<span></div>
+							<div class="status"><h4>AJAX</h4></div>
+						</li>
+						<li class="current">
+							<div class="timestamp"><span class="date">2010<span></div>
+							<div class="status"><h4>Angular</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2013<span></div>
+							<div class="status"><h4>React</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2014<span></div>
+							<div class="status"><h4>Elm</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2015<span></div>
+							<div class="status"><h4>Redux</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2016<span></div>
+							<div class="status"><h4>Halogen</h4></div>
+						</li>
+					</ul>
+					<p class="timeline-desc">
+						In came the data-binding MVC-esque frameworks.
+						<br /><br />
+						Took away some of the headache of managing the DOM and separated the business logic out.
+						<br /><br />
+						Updates to the model were still pretty messy. Especially on the async front.
+					</p>
+					<aside class="notes">
+						Backbone, Angular, Emberjs, D3
+					</aside>
+				</section>
+				<section data-transition="fade-in" class="timeline-slide">
+					<ul class="timeline">
+						<li class="">
+							<div class="timestamp"><span class="date">1995<span></div>
+							<div class="status"><h4>DHTML</h4></div>
+						</li>
+						<li class=""future>
+							<div class="timestamp"><span class="date">2005<span></div>
+							<div class="status"><h4>AJAX</h4></div>
+						</li>
+						<li class="">
+							<div class="timestamp"><span class="date">2010<span></div>
+							<div class="status"><h4>Angular</h4></div>
+						</li>
+						<li class="current">
+						  <div class="timestamp"><span class="date">2013<span></div>
+							<div class="status"><h4>React</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2014<span></div>
+							<div class="status"><h4>Elm</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2015<span></div>
+							<div class="status"><h4>Redux</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2016<span></div>
+							<div class="status"><h4>Halogen</h4></div>
+						</li>
+					</ul>
+					<p class="timeline-desc">
+						Virtual DOM made dumb, pure views possible.
+						<br /><br />
+						Minimised the mutable state and tried to make as much of the components pure.
+						<br /><br />
+						The mutable state that remained still was a hassle around async things.
+					</p>
+					<aside class="notes">
+						Mention virtual dom.
+					</aside>
+				</section>
+				<section data-transition="fade-in" class="timeline-slide">
+					<ul class="timeline">
+						<li class="">
+							<div class="timestamp"><span class="date">1995<span></div>
+							<div class="status"><h4>DHTML</h4></div>
+						</li>
+						<li class=""future>
+							<div class="timestamp"><span class="date">2005<span></div>
+							<div class="status"><h4>AJAX</h4></div>
+						</li>
+						<li class="">
+							<div class="timestamp"><span class="date">2010<span></div>
+							<div class="status"><h4>Angular</h4></div>
+						</li>
+						<li class="">
+						  <div class="timestamp"><span class="date">2013<span></div>
+							<div class="status"><h4>React</h4></div>
+						</li>
+						<li class="current">
+						  <div class="timestamp"><span class="date">2014*<span></div>
+							<div class="status"><h4>Elm</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2015<span></div>
+							<div class="status"><h4>Redux</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2016<span></div>
+							<div class="status"><h4>Halogen</h4></div>
+						</li>
+					</ul>
+					<p class="timeline-desc">
+						Virtual dom views + a pure state update function.
+						<br /><br />
+						And types! Elm introduced describing the state events as a sum type.
+						<br /><br />
+						Async events also flowed through these same pipelines, serialising them all in one place.
+					</p>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section data-transition="fade-in" class="timeline-slide">
+					<ul class="timeline">
+						<li class="">
+							<div class="timestamp"><span class="date">1995<span></div>
+							<div class="status"><h4>DHTML</h4></div>
+						</li>
+						<li class=""future>
+							<div class="timestamp"><span class="date">2005<span></div>
+							<div class="status"><h4>AJAX</h4></div>
+						</li>
+						<li class="">
+							<div class="timestamp"><span class="date">2010<span></div>
+							<div class="status"><h4>Angular</h4></div>
+						</li>
+						<li class="">
+						  <div class="timestamp"><span class="date">2013<span></div>
+							<div class="status"><h4>React</h4></div>
+						</li>
+						<li class="">
+						  <div class="timestamp"><span class="date">2014*<span></div>
+							<div class="status"><h4>Elm</h4></div>
+						</li>
+						<li class="current">
+						  <div class="timestamp"><span class="date">2015<span></div>
+							<div class="status"><h4>Redux</h4></div>
+						</li>
+						<li class="future">
+						  <div class="timestamp"><span class="date">2016<span></div>
+							<div class="status"><h4>Halogen</h4></div>
+						</li>
+					</ul>
+					<p class="timeline-desc">
+						React community borrowing the Elm idea of defining state changes as a data type.
+						<br /><br />
+						Pure model update + things like Rx to manage effects.
+						<br /><br />
+						Also started trying to work in types to Redux.
+					</p>
+					<aside class="notes">
+						<p>JS People talking about pure functions and types as though they 
+						are useful. Awesomely cool.</p>
+					</aside>
+				</section>
+				<section data-transition="fade-in" class="timeline-slide">
+					<ul class="timeline">
+						<li class="">
+							<div class="timestamp"><span class="date">1995<span></div>
+							<div class="status"><h4>DHTML</h4></div>
+						</li>
+						<li class=""future>
+							<div class="timestamp"><span class="date">2005<span></div>
+							<div class="status"><h4>AJAX</h4></div>
+						</li>
+						<li class="">
+							<div class="timestamp"><span class="date">2010<span></div>
+							<div class="status"><h4>Angular</h4></div>
+						</li>
+						<li class="">
+						  <div class="timestamp"><span class="date">2013<span></div>
+							<div class="status"><h4>React</h4></div>
+						</li>
+						<li class="">
+						  <div class="timestamp"><span class="date">2014*<span></div>
+							<div class="status"><h4>Elm</h4></div>
+						</li>
+						<li class="">
+						  <div class="timestamp"><span class="date">2015<span></div>
+							<div class="status"><h4>Redux</h4></div>
+						</li>
+						<li class="current">
+						  <div class="timestamp"><span class="date">2016*<span></div>
+							<div class="status"><h4>Halogen</h4></div>
+						</li>
+					</ul>
+					<p class="timeline-desc">
+						Purescript library for furthering the TEA
+						<br /><br />
+						But with a better type system and more functional goodies
+						<br /><br />
+						The talk and workshop aims to dig into these differences
+					</p>
+					<aside class="notes">
+						These dates for elm and halogen are a slight lie: but lets not let the truth get in the road of a good visualisation, please! :D
+					</aside>
+				</section>
+				<section>
+					<h3>It's an incredibly cool time to be in this space!</h3>
+				</section>
+				<section>
+					<h3>It feels like we've ironed out a lot of the old issues by making things more functional</h3>
+				</section>
+				<section>
+					<h3>And Elm has even captured the attention of JS devs enough to cross polinate ideas!</h3>
+				</section>
+				<section>
+					<h3>Browsers are quickly becoming the UI of choice (even for desktop)</h3>
+				</section>
+				<section>
+					<h3>We'll be DOM coding whether we like it or not, so we may as well jump in and help things get more functional</h3>
+				</section>
+				<section>
+					<h2>Lets talk more about Elm and Halogen.</h2>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Elm</h1>
+				</section>
+				<section>
+					<h2>Purely functional UI Language</h2>
+					<ul>
+						<li class="fragment">Compiles to javascript</li>
+						<li class="fragment">No mutation</li>
+						<li class="fragment">Tracked effects</li>
+						<li class="fragment">Leans on virtual DOM</li>
+					</ul>
+				</section>
+				<section>
+					<h2>The Elm Architecture</h2>
+					<img class="no-border" src="./lib/images/mvi.png" alt="Model View Intent / Elm">
+				</section>
+				<section>
+					<pre><code class="elm">
+view : Model -> Html Msg						
+					</code></pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Halogen</h1>
+				</section>
+				<section>
+					<h2>Is designed to make composable components (components are like elm programs)</h2>
+        </section>
+			</section>
+			<section>
+				<section>
+					<h1>Conclusion</h1>
+				</section>
+				<section>
+					<h2>Come to the workshop!</h2>
+					<p class="fragment">You'll want purescript, pulp, bower and elm installed</p>
+					<p class="fragment">VSCode is handy</p>
+					<p class="fragment">Come chat to me if you need help with this. I'll be in this room during lunchtime to help</p>
+				</section>
+			</section>
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			history: true,
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+			]
+		});
+	</script>
+</body>
+
+</html>

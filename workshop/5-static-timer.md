@@ -6,7 +6,7 @@ as you have most of what you need to implement things from now.
 This step, we will refactor main into a separate component that has two 
 children: Todos (the one that we wrote before) & Pomodoro.
 
-We are going to want a state of Maybe millisecondsRemaining that powers this DOM structure:
+We are going to want a state of `Maybe { minutesRemaining :: Int, secondsRemaining :: Int}` that powers this DOM structure:
 
 ```html
 <section class pomodoro>
@@ -20,7 +20,7 @@ We are going to want a state of Maybe millisecondsRemaining that powers this DOM
     <section class="timer">
         <span class="timer-minutes">25</span>
         <span class="timer-colon">:</span>
-        <span class="timer-seconds>00</span>
+        <span class="timer-seconds">00</span>
     </section>
 </section>
 ```
