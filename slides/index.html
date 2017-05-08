@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>reveal.js</title>
+	<title>Reading the TEA Leaves: Halogen and Elm</title>
 
 	<link rel="stylesheet" href="css/reveal.css">
 	<link rel="stylesheet" href="css/theme/bens.css">
@@ -54,7 +54,9 @@
 					<img src="lib/images/ben.jpg" alt="Ben 10 years ago" class="fragment" data-fragment-index=0>
 					<p class="red crazy fragment" data-fragment-index=0>WAT?!?</p>
 					<aside class="notes">
-						<p>If for some reason you don't prefer older, hairier Ben, I wont be offended if you head out now. ;)</p>
+						<p>If you feel ripped off that you're getting an older, hairier Ben, I wont be offended if you head out now and go to
+							Hibberd's talk instead. ;)
+						</p>
 					</aside>
 				</section>
 				<section>
@@ -73,18 +75,35 @@
 				</section>
 				<section>
 					<h2>I also coorganise the Brisbane FP User Group</h2>
+					<aside class="notes">
+						<p>I also help run the BFPG</p>
+					</aside>
 				</section>
 				<section>
 					<h2>I am a stickler for abstractions</h2>
+					<aside class="notes">
+						<p>As a programmer, I am a stickler for clean abstractions</p>
+					</aside>
 				</section>
 				<section>
 					<h2>Especially abstractions that give a program "just enough power"</h2>
+					<aside class="notes">
+						<p>Especially abstractions that give just enough power for my code to do what it needs to do.</p>
+					</aside>
 				</section>
 				<section>
 					<h2>Whilst not making programs harder to reason about by giving them<br />"too much" power</h2>
+					<aside class="notes">
+						<p>Whilst not giving them too much power that I need to unnecessarily reason about when my code don't actually need/use
+							them.
+						</p>
+					</aside>
 				</section>
 				<section>
 					<h2>Read: I am an insufferable functional programming pedant</h2>
+					<aside class="note">
+						<p>Some may say that I'm an FP zealot and I'm a pain in the ass, and they are probably right!</p>
+					</aside>
 				</section>
 				<section>
 					<h2>I love things that allow me to reason about my program better:</h2>
@@ -96,21 +115,48 @@
 						<li class="fragment">FRP</li>
 						<li class="fragment">etc. :)</li>
 					</ul>
+					<aside class="notes">
+						<p>But at heart I just love things that allow me to reason about my program better.</p>
+					</aside>
 				</section>
 				<section>
-					<h2>I love these things because most of the time and money spent on software is in maintenance</h2>
+					<h2>Because most of my time is spent maintaining code than writing new stuff</h2>
+					<aside class="notes">
+						<p>Because I spent way more time reading and reasoning about code than I do writing it.</p>
+					</aside>
 				</section>
 				<section>
 					<h2>And the easier code is to reason about, the safer it is to refactor and compose</h2>
+					<aside class="notes">
+						<p>And the easier code is to reason about, the easier it is to refactor and compose.</p>
+					</aside>
 				</section>
 				<section>
-					<h2>And we are going to want to compose and refactor <em style="text-decoration: underline; font-size: 1.2em;">a lot</em>						once the code grows</h2>
+					<h2>And we are going to want to compose and refactor <em style="text-decoration: underline; font-size: 1.2em;">a lot</em>						as our code grows</h2>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 				<section>
-					<h2>This is especially important with UIs, as they are on the bear the churn of human inconsistency and fickleness</h2>
+					<h2>So I have no reservations about optimising for that case</h2>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 				<section>
-					<h2>So I feel like getting our UIs more functional is an exceptionally fun and interesting task</h2>
+					<h2>This is especially important with UIs, as they bear the churn of human inconsistency and fickleness</h2>
+					<aside class="notes">
+						<p>
+							Anyone who's worked on a big UI before realises how messy they can get from little experiments and scope creep from people
+							not knowing what they want until they see it.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>So I feel like any efforts make FP more functional and maintainable are exciting and well worth the effort.</h2>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 			</section>
 			<section>
@@ -119,13 +165,22 @@
 				</section>
 				<section>
 					<h2>Historically, have not had the nice things that we want</h2>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 				<section>
 					<h2>But it is slowly getting better</h2>
 					<h3 class=fragment>( and this is awesome! )</h3>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 				<section>
 					<h2>Lets review some of the history of our JS UI journey so far.</h2>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 				<section data-transition="fade-in" class="timeline-slide">
 					<ul class="timeline">
@@ -422,21 +477,39 @@
 				</section>
 				<section>
 					<h3>It's an incredibly cool time to be in this space!</h3>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 				<section>
 					<h3>It feels like we've ironed out a lot of the old issues by making things more functional</h3>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 				<section>
 					<h3>And Elm has even captured the attention of JS devs enough to cross polinate ideas!</h3>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 				<section>
 					<h3>Browsers are quickly becoming the UI of choice (even for desktop)</h3>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 				<section>
 					<h3>We'll be DOM coding whether we like it or not, so we may as well jump in and help things get more functional</h3>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 				<section>
 					<h2>Lets talk more about Elm and Halogen.</h2>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 			</section>
 			<section>
@@ -451,15 +524,106 @@
 						<li class="fragment">Tracked effects</li>
 						<li class="fragment">Leans on virtual DOM</li>
 					</ul>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 				<section>
-					<h2>The Elm Architecture</h2>
 					<img class="no-border" src="./lib/images/mvi.png" alt="Model View Intent / Elm">
+					<pre><code class="elm" data-trim>
+program :
+  { init          : (model, Cmd msg)
+  , update        : msg -> model -> (model, Cmd msg)
+  , subscriptions : model -> Sub msg
+  , view          : model -> Html msg 
+  } -> Program Never</code></pre>
 				</section>
 				<section>
-					<pre><code class="elm">
+					<pre><code class="elm" data-trim>
+init : (Model, Cmd Msg)
+					</code></pre>
+					<p>Provides the initial state value for program</p>
+					<p>And an optional side effect to further load the UI (e.g. An AJAX request)</p>
+					<p>The Cmd just feeds a Msg back into our program when it is done.</p>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+				<section>
+					<pre><code class="elm" data-trim>
 view : Model -> Html Msg						
 					</code></pre>
+					<p>Takes the model and creates a virtual DOM tree</p>
+					<p>Elm patch the real DOM based on VDom diff</p>
+					<p>Any DOM Events that we are watching (clicks, etc) are will raise Msgs back to our program</p>
+					<aside class="notes">
+						<p></p>
+					</aside>
+  			</section>
+				<section>
+					<pre><code class="elm" data-trim>
+update : Msg -> Model -> (Model, Cmd Msg)
+					</code></pre>
+					<p>Takes a Msg, the previous model and returns the new model.</p>
+					<p>Optionally raises a side effect that will raise another Msg back to us.</p>
+					<aside class="notes">
+						<p></p>
+					</aside>
+  			</section>
+				<section>
+					<pre><code class="elm" data-trim>
+subscriptions : Sub Msg
+					</code></pre>
+					<p>Defines a list of outside things (Time, Websockets, etc) that our program wants to listen to.</p>
+					<p>These are packaged up in a Msg/Event which get fed into our update</p>
+					<aside class="notes">
+						<p></p>
+					</aside>
+  			</section>
+				<section>
+					<h2>This is beautifully simple!</h2>
+					<p class="fragment">But it can be a little too simple depending on what you need.</p>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+				<section>
+					<h2>Modularity</h2>
+					<p>You can't compose programs together</p>
+					<p>You can only manually compose the model types, msgs, updates and views</p>
+					<p>The Model and Msg types get really big, littered with information that is both public and private to child UI components</p>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+				<section>
+					<h2>Cmds make our Msg type noisy</h2>
+					<p>Example: A button which AJAX loads a file on click:</p>
+					<ul>
+						<li class="fragment">LoadFileClicked</li>
+						<li class="fragment">LoadFileLoadedOk FileData</li>
+						<li class="fragment">LoadFileFailed ErrorMessage</li>
+					</ul>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+				<section>
+					<h2>Cmd is also not a Monad :(</h2>
+					<p class="fragment">All sequencing has to be done by coming back into update and raising another command</p>
+					<p class="fragment">Very difficult to see the actual unit of work through the noise</p>
+					<p class="fragment">Can end up writing your own state machine in update when you really just want a Cmd monad</p>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+				<section>
+					<h2>Elm could very much work for you!</h2>
+					<p class="fragment">It seems to be working for a lot of people!</p>
+					<p class="fragment">... but to me it feels like there is room for improvement.</p>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 			</section>
 			<section>
@@ -467,18 +631,120 @@ view : Model -> Html Msg
 					<h1>Halogen</h1>
 				</section>
 				<section>
-					<h2>Is designed to make composable components (components are like elm programs)</h2>
+					<h2>Purescript framework which:</h2>
+					<ul>
+						<li class="fragment">Compiles down to JS</li>
+						<li class="fragment">Is purely functional</li>
+						<li class="fragment">Has virtual DOM views</li>
+						<li class="fragment">Is based on events flowing into an eval function</li>
+					</ul>
+					<br>
+					<p class="fragment">(It looks a lot like elm on the surface!)</p>
+					<aside class="notes">
+						<p></p>
+					</aside>
         </section>
+			  <section>
+					<h2>But it also has some other cool tricks!</h2>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+				<section>
+					<h3>A monadic eval that can sequence multiple backend calls into a single event process</h3>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+				<section>
+					<h3>Nestable components where you can't forget to wire something up</h3>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+				<section>
+					<h3>State of a component is hidden, so a parent can't break any abstractions of the children</h3>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+				<section>
+					<h3>But children can allow parents to query state</h3>
+					<p class="fragment">This is really useful for some operations where it would not be performant to raise an event on every update.</p>
+					<p class="fragment">Like a text editor, where parent's may query for the content but it wouldn't scale to emit a content event on every keystroke</p>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+				<section>
+					<h2>This extra power doesn't come for free!</h2>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+			  <section>
+					<h2>Halogen is a bit more complicated</h2>
+					<img src="lib/images/halogen.png" alt="Halogen's architecture. A bit more complicated. ;)'" class="no-border">
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+			  <section>
+					<h2>And maybe a little intimidating</h2>
+					<pre><code class="purescript" data-trim>
+type ComponentSpec h s f i o m =
+  { initialState :: i -> s
+  , render       :: s -> h Void (f Unit)
+  , eval         :: f a -> ComponentDSL s f o m a
+  , receiver     :: i -> Maybe (f Unit)
+  }						
+					</code></pre>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+			  <section>
+					<h2>But I think that it's worth it! :)</h2>
+					<p>But I can't possibly convince you of this in a talk: that's what the workshop is for!</p>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
 			</section>
 			<section>
 				<section>
-					<h1>Conclusion</h1>
+					<h1>Workshop</h1>
 				</section>
 				<section>
-					<h2>Come to the workshop!</h2>
+					<h2>We'll implement the same application in both Elm and Halogen</h2>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+				<section>
+					<h2>This should help you see the differences and help you decide which one is for you</h2>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+				<section>
+					<h2>What you will need:</h2>
+					<p class="fragment">The code checked out: <a href="https://github.com/benkolera/ylj-reading-the-tea-leaves/">https://github.com/benkolera/ylj-reading-the-tea-leaves/</a></p>
 					<p class="fragment">You'll want purescript, pulp, bower and elm installed</p>
 					<p class="fragment">VSCode is handy</p>
 					<p class="fragment">Come chat to me if you need help with this. I'll be in this room during lunchtime to help</p>
+					<aside class="notes">
+						<p></p>
+					</aside>
+				</section>
+				</section>
+				<section>
+				<section>
+					<h1>Thanks!</h1>
+					<a href="https://github.com/benkolera/ylj-reading-the-tea-leaves/">https://github.com/benkolera/ylj-reading-the-tea-leaves/</a>
+					<aside class="notes">
+						<p></p>
+					</aside>
 				</section>
 			</section>
 		</div>
